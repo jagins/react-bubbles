@@ -20,19 +20,19 @@ const ColorList = ({ colors, updateColors }) => {
   const saveEdit = e => {
     e.preventDefault();
     axiosWithAuth().put(`/colors/${colorToEdit.id}`, colorToEdit)
-    .then(res => {
-      updateColors([...colors.filter(color => color.id !== colorToEdit.id), res.data]);
-      setEditing(false);
-    })
-    .catch(err => console.log(err))
+      .then(res => {
+        updateColors([...colors.filter(color => color.id !== colorToEdit.id), res.data]);
+        setEditing(false);
+      })
+      .catch(err => console.log(err))
   };
 
   const deleteColor = color => {
     axiosWithAuth().delete(`/colors/${color.id}`)
-    .then(res => {
-      updateColors([...colors.filter(color => color.id !== res.data)])
-    })
-    .catch(err => console.log(err))
+      .then(res => {
+        updateColors([...colors.filter(color => color.id !== res.data)])
+      })
+      .catch(err => console.log(err))
   };
 
   return (
@@ -43,11 +43,11 @@ const ColorList = ({ colors, updateColors }) => {
           <li key={color.color} onClick={() => editColor(color)}>
             <span>
               <span className="delete" onClick={e => {
-                    e.stopPropagation();
-                    deleteColor(color)
-                  }
-                }>
-                  x
+                e.stopPropagation();
+                deleteColor(color)
+              }
+              }>
+                x
               </span>{" "}
               {color.color}
             </span>
@@ -89,7 +89,6 @@ const ColorList = ({ colors, updateColors }) => {
         </form>
       )}
       <div className="spacer" />
-      {/* stretch - build another form here to add a color */}
     </div>
   );
 };
